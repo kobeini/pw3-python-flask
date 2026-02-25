@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Filmes - Lista</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+      }
+
+      h1 {
+        color: white;
+        font-size: 48px;
+        text-align: center;
+        margin: 30px 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        animation: fadeInDown 1s ease;
+      }
+
+      hr {
+        width: 80%;
+        max-width: 800px;
+        margin: 20px auto 40px;
+        border: none;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, white, transparent);
+        animation: fadeIn 1.5s ease;
+      }
+
+      .table-container {
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        max-width: 1200px;
+        width: 100%;
+        margin: 20px auto;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        animation: fadeInUp 1s ease;
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        text-align: left;
+      }
+
+      th {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 15px;
+        font-size: 16px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+      }
+
+      th:first-child {
+        border-top-left-radius: 10px;
+        border-left: 2px solid transparent;
+      }
+
+      th:last-child {
+        border-top-right-radius: 10px;
+        border-right: 2px solid transparent;
+      }
+
+      td {
+        padding: 15px;
+        color: #333;
+        font-size: 15px;
+        border: 2px solid #e0e0e0;
+        border-top: none;
+        background: white;
+      }
+
+      /* Bordas laterais para todas as células */
+      td:first-child {
+        border-left: 2px solid #e0e0e0;
+      }
+
+      td:last-child {
+        border-right: 2px solid #e0e0e0;
+      }
+
+      /* Estilo específico para cada linha */
+      tr:first-child td {
+        border-top: 2px solid #e0e0e0;
+      }
+
+      /* Bordas inferiores apenas na última linha */
+      tr:last-child td {
+        border-bottom: 2px solid #e0e0e0;
+      }
+
+      /* Efeito hover nas linhas */
+      tr:hover td {
+        background: linear-gradient(135deg, #f5f7ff 0%, #f3f0ff 100%);
+        border-color: #667eea;
+        transition: all 0.3s ease;
+      }
+
+      /* Bordas coloridas no hover */
+      tr:hover td:first-child {
+        border-left-color: #667eea;
+      }
+
+      tr:hover td:last-child {
+        border-right-color: #667eea;
+      }
+
+      tr:hover td {
+        border-top-color: #667eea;
+        border-bottom-color: #667eea;
+      }
+
+      /* Primeira linha após o cabeçalho */
+      tbody tr:first-child td {
+        border-top: 2px solid #e0e0e0;
+      }
+
+      .sinopse-preview {
+        max-width: 250px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: #666;
+        font-style: italic;
+      }
+
+      /* Separador visual entre filmes */
+      .movie-separator td {
+        background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 100%);
+        height: 5px;
+        padding: 0;
+        border: none;
+      }
+
+      /* Efeito de sombra interna para cada card de filme */
+      tr:not(:last-child) td {
+        border-bottom: 2px solid #e0e0e0;
+      }
+
+      /* Bordas arredondadas para cada "card" de filme */
+      tr:first-child td:first-child {
+        border-top-left-radius: 10px;
+      }
+
+      tr:first-child td:last-child {
+        border-top-right-radius: 10px;
+      }
+
+      tr:last-child td:first-child {
+        border-bottom-left-radius: 10px;
+      }
+
+      tr:last-child td:last-child {
+        border-bottom-right-radius: 10px;
+      }
+
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* Responsividade */
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 32px;
+          margin: 20px 10px;
+        }
+
+        hr {
+          width: 90%;
+        }
+
+        .table-container {
+          padding: 15px;
+        }
+
+        th {
+          padding: 10px;
+          font-size: 14px;
+        }
+
+        td {
+          padding: 10px;
+          font-size: 13px;
+        }
+
+        .sinopse-preview {
+          max-width: 150px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .table-container {
+          padding: 10px;
+        }
+
+        th {
+          font-size: 12px;
+          padding: 8px;
+        }
+
+        td {
+          font-size: 11px;
+          padding: 8px;
+        }
+
+        .sinopse-preview {
+          max-width: 100px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Catálogo de Filmes</h1>
+    <hr />
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Diretor(a)</th>
+            <th>Data de Lançamento</th>
+            <th>Sinopse</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Pobres Criaturas</strong></td>
+            <td>Yorgos Lanthimos</td>
+            <td>25/01/2024</td>
+            <td
+              class="sinopse-preview"
+              title="Uma jovem é trazida de volta à vida por um cientista brilhante e não convencional, embarcando em uma jornada de autodescoberta e libertação."
+            >
+              Uma jovem é trazida de volta à vida por um cientista brilhante e
+              não convencional, embarcando em uma jornada de autodescoberta e
+              libertação.
+            </td>
+          </tr>
+                    <tr class="movie-separator">
+            <td colspan="4"></td>
+          </tr>
+          <tr>
+            <td><strong>Saneamento Básico, O Filme</strong></td>
+            <td>Jorge Furtado</td>
+            <td>20/07/2007</td>
+            <td
+              class="sinopse-preview"
+              title="Uma pequena comunidade de descendentes de imigrantes italianos do interior do estado do Rio Grande do Sul recorre a um vídeo caseiro para tentar resolver os problemas básicos de saneamento que afetam seu povo."
+            >
+             Uma pequena comunidade de descendentes de imigrantes italianos do interior do estado do Rio Grande do Sul recorre a um vídeo caseiro para tentar resolver os problemas básicos de saneamento que afetam seu povo.
+            </td>
+          </tr>
+          <tr class="movie-separator">
+            <td colspan="4"></td>
+          </tr>
+          </tr>
+          <tr>
+            <td><strong>Marty Supreme</strong></td>
+            <td>Josh Safdie</td>
+            <td>25/12/2025</td>
+            <td
+              class="sinopse-preview"
+              title="Um jogador profissional de tênis de mesa nos anos 2000 enfrenta desafios pessoais e profissionais em sua busca pela excelência."
+            >
+              Um jogador profissional de tênis de mesa nos anos 2000 enfrenta
+              desafios pessoais e profissionais em sua busca pela excelência.
+            </td>
+          </tr>
+          <tr class="movie-separator">
+            <td colspan="4"></td>
+          </tr>
+          <tr>
+            <td><strong>Look Back</strong></td>
+            <td>Kiyotaka Oshiyama</td>
+            <td>28/06/2024</td>
+            <td
+              class="sinopse-preview"
+              title="Duas jovens talentosas se unem através da paixão pelo mangá, enfrentando desafios e descobrindo o verdadeiro significado da amizade e da arte."
+            >
+              Duas jovens talentosas se unem através da paixão pelo mangá,
+              enfrentando desafios e descobrindo o verdadeiro significado da
+              amizade e da arte.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
