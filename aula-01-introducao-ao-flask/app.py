@@ -17,12 +17,19 @@ def home():
 
 @app.route('/games')
 def games():
-    return render_template('games.html')
+    #Criar informação para a rota de games
+    titulo = "Portal 2"
+    ano = 2011
+    categoria = "Puzzle"
+    jogadores = ['Marcos', 'Richard', "Miguel", 'Renato', 'Pedro']
+    return render_template('games.html', titulo = titulo, ano = ano, categoria = categoria, jogadores = jogadores)
 
 
 @app.route('/consoles')
 def consoles():
-    return render_template('consoles.html')
+    #criando um objeto 
+    console = {"Nome:" : "Playstation 2 ", "Fabricante: " : "Sony", "Ano: " : 2000}
+    return render_template('consoles.html', console = console)
 # Servidor python sempre abre na porta 5000
 if __name__ == '__main__':
     # Verificando se o arquivo __name__ é o arquivo principal
