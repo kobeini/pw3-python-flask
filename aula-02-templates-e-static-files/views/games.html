@@ -1,22 +1,22 @@
-{% extends 'base.html' %}
-{% block content %}
-    <a href="/">Voltar</a>
-    <br>
-    <h1>Página de Games!</h1>
-    <h2>Jogo em destaque</h2>
-    <p>Jogo  mais jogado pelos nossos usuários:</p>
-    <ul>
-        {# Variáveis são colocadas por meio de chaves duplas #}
-        <li>Título: <strong> {{ titulo }} </strong> </li>
-        <li>Ano: <strong>{{ ano }} </strong> </li>
-        <li>Categoria: <strong>{{ categoria }} </strong> </li>
-        <p>O jogo {{titulo}} tem {{2026-ano}} anos desde seu lançamento</p>
-    </ul>
-    <h3>Ranking:</h3>
-    <ol>
-        {% for jogador in jogadores: %}
-        <li> {{jogador}} </li>
-        {%endfor%}
-    </ol>
-    <hr>
+{% extends 'base.html' %} {% block content %}
+<main>
+  <br />
+  <h1>Página de Games!</h1>
+  <h2>Jogo em destaque</h2>
+  <p>Jogo mais jogado pelos nossos usuários:</p>
+  <ul>
+    {# Variáveis são colocadas por meio de chaves duplas #}
+    <li>Título: <strong> {{ titulo }} </strong></li>
+    <li>Ano: <strong>{{ ano }} </strong></li>
+    <li>Categoria: <strong>{{ categoria }} </strong></li>
+    <p>O jogo {{titulo}} tem {{2026-ano}} anos desde seu lançamento</p>
+  </ul>
+  <h3>Ranking:</h3>
+  <ol>
+    {% for jogador in jogadores: %}
+    <li>{{jogador}}</li>
+    {%endfor%}
+  </ol>
+  <hr />
+</main>
 {% endblock content %}

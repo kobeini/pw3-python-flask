@@ -1,15 +1,13 @@
-{%extends 'base.html'%}
-{%block content%}
-    <a href="/">Voltar</a>
-    <br>
-
-    <h1>Página de Consoles!</h1>
-    <h2>Console em destaque:</h2>
-    {% for chave, valor in console.items() %}
-    <details>
+{%extends 'base.html'%} {%block content%}
+<main>
+  <h1>Página de Consoles!</h1>
+  <h2>Console em destaque:</h2>
+  {% for chave, valor in console.items() %}
+  <details>
     <summary>{{chave}}</summary>
     <p>{{valor}}</p>
-    </details>
-    {%endfor%}
-    <hr>
+  </details>
+  {%endfor%}
+  <hr />
+</main>
 {%endblock%}
