@@ -9,8 +9,8 @@ def init_app(app):
 
     listaConsoles = ['Playstation 5', 'Xbox One',
             'Super Nintendo', 'Atari 2600', 'Nintendo 3DS']
-
-
+    listaGames = [{'titulo' : 'CS-GO', 'ano' : 2012, 'categoria' : 'FPS Online', 'plataforma' : 'PC (Windows)'}]
+    
     @app.route('/')
     def home():
         return render_template('index.html')
@@ -29,9 +29,15 @@ def init_app(app):
         # criando um objeto
         console = {"Nome:": "Playstation 2 ",
                    "Fabricante: ": "Sony", "Ano: ": 2000}
-        #Recebendo o valor do formulário
+        # Recebendo o valor do formulário
         if request.method == 'POST':
             if request.form.get('novoConsole'):
                 listaConsoles.append(request.form.get('novoConsole'))
-        
+
         return render_template('consoles.html', console=console, listaConsoles=listaConsoles)
+
+    @app.route('/cadastrar', methods=['GET', 'POST'])
+    def cadastrar():
+        if request.method == 'POST':
+            listaGames.append({'titulo' : request.form.get('titulo'), 'ano' : request.form.get('ano'), 'categoria' : request.form.get('categoria'), 'plataforma' : request.form.get('plataforma')})
+        return render_template('cadastrar.html', listaGames = listaGames)
