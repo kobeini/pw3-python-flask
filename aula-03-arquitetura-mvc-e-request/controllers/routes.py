@@ -1,5 +1,5 @@
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 
 
 app = Flask(__name__, template_folder='views')
@@ -40,4 +40,5 @@ def init_app(app):
     def cadastrar():
         if request.method == 'POST':
             listaGames.append({'titulo' : request.form.get('titulo'), 'ano' : request.form.get('ano'), 'categoria' : request.form.get('categoria'), 'plataforma' : request.form.get('plataforma')})
+            return redirect(url_for('cadgames'))
         return render_template('cadastrar.html', listaGames = listaGames)
